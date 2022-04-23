@@ -1,0 +1,6 @@
+CREATE TABLE `uczen` (
+	`id_ucznia` BIGINT AUTO_INCREMENT PRIMARY KEY,
+	`imie` VARCHAR(255) NOT NULL,
+	`nazwisko` VARCHAR(255) NOT NULL,
+	`data_urodzenia` DATE NOT NULL
+) ENGINE=InnoDB;
