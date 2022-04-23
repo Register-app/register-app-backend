@@ -27,6 +27,6 @@ public class StudentController {
 
     @GetMapping("/students/{id}")
     public Student getStudent(@PathVariable Long id){
-        throw new IllegalArgumentException("Not implemented yet");
+        return studentService.getSingleStudent(id);
     }
 }
