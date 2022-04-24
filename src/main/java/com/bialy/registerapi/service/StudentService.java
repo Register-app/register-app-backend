@@ -2,7 +2,6 @@ package com.bialy.registerapi.service;
 
 import com.bialy.registerapi.model.Student;
 import com.bialy.registerapi.repository.StudentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
