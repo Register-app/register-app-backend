@@ -1,7 +1,7 @@
 package com.registerapp.registerServerAPI.controller;
 
 import com.registerapp.registerServerAPI.model.Student;
-import com.registerapp.registerServerAPI.service.StudentService;
+import com.registerapp.registerServerAPI.service.StudentServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,9 +13,9 @@ import java.util.List;
 @RequestMapping("/")
 public class StudentController {
 
-    private final StudentService studentService;
+    private final StudentServiceImpl studentService;
 
-    public StudentController(StudentService studentService) {
+    public StudentController(StudentServiceImpl studentService) {
         this.studentService = studentService;
     }
 
