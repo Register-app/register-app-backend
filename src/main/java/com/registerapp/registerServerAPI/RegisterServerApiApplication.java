@@ -1,13 +1,13 @@
-package com.bialy.registerapi;
+package com.registerapp.registerServerAPI;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RegisterApiApplication {
+public class RegisterServerApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RegisterApiApplication.class, args);
+		SpringApplication.run(RegisterServerApiApplication.class, args);
 	}
 
 }

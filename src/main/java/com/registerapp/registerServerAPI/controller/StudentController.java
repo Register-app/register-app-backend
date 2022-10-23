@@ -1,8 +1,7 @@
-package com.bialy.registerapi.controller;
+package com.registerapp.registerServerAPI.controller;
 
-import com.bialy.registerapi.model.Student;
-import com.bialy.registerapi.service.StudentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.registerapp.registerServerAPI.model.Student;
+import com.registerapp.registerServerAPI.service.StudentService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

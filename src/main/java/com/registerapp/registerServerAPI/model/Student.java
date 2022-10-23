@@ -1,4 +1,4 @@
-package com.bialy.registerapi.model;
+package com.registerapp.registerServerAPI.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
