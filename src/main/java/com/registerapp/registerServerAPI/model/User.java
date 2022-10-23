@@ -20,8 +20,8 @@ public class User {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "surname")
-    private String surname;
+    @Column(name = "second_name")
+    private String second_name;
 
     @Column(name = "email")
     private String email;
@@ -50,9 +50,9 @@ public class User {
     )
     private Collection<Role> roles;
 
-    public User(String name, String surname, String email, String password, Collection<Role> roles) {
+    public User(String name, String second_name, String email, String password, Collection<Role> roles) {
         this.name = name;
-        this.surname = surname;
+        this.second_name = second_name;
         this.email = email;
         this.password = password;
         this.roles = roles;

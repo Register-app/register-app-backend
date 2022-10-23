@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService{
     public User save(UserRegistrationDto userRegistrationDto) {
         User user = new User(
                 userRegistrationDto.getName(),
-                userRegistrationDto.getSurname(),
+                userRegistrationDto.getSecond_name(),
                 userRegistrationDto.getEmail(),
                 userRegistrationDto.getPassword(),
                 Arrays.asList(new Role("ROLE_USER"))
