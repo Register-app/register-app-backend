@@ -3,23 +3,23 @@ package com.registerapp.registerServerAPI.controller;
 import com.registerapp.registerServerAPI.dto.UserRegistrationDto;
 import com.registerapp.registerServerAPI.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-@AllArgsConstructor
+
+@RestController
 @RequestMapping("/registration")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class UserRegistrationController {
 
+    @Autowired
     private UserService userService;
 
     @PostMapping
-    public String registerUserAccount(@ModelAttribute("user")UserRegistrationDto registrationDto){
+    public ResponseEntity<?> registerUserAccount(@RequestBody UserRegistrationDto registrationDto){
         userService.save(registrationDto);
-        return "User registered successfully!";
+        return ResponseEntity.ok("User registered successfully!");
     }
 }
