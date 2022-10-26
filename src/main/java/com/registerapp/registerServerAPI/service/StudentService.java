@@ -1,17 +1,17 @@
 package com.registerapp.registerServerAPI.service;
 
-import com.registerapp.registerServerAPI.model.Student;
+import com.registerapp.registerServerAPI.entity.Student;
 import com.registerapp.registerServerAPI.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class StudentServiceImpl {
+public class StudentService {
 
     private StudentRepository studentRepository;
 
-    public StudentServiceImpl(StudentRepository studentRepository) {
+    public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
 

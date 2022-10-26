@@ -1,16 +1,19 @@
-package com.registerapp.registerServerAPI.model;
+package com.registerapp.registerServerAPI.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.Set;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Table(name = "user")
 public class User {
 
     @Id
@@ -48,9 +51,9 @@ public class User {
                     name = "role_id", referencedColumnName = "role_id"
             )
     )
-    private Collection<Role> roles;
+    private Set<Role> roles;
 
-    public User(String name, String second_name, String email, String password, Collection<Role> roles) {
+    public User(String name, String second_name, String email, String password, Set<Role> roles) {
         this.name = name;
         this.second_name = second_name;
         this.email = email;

@@ -1,4 +1,4 @@
-package com.registerapp.registerServerAPI.model;
+package com.registerapp.registerServerAPI.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
