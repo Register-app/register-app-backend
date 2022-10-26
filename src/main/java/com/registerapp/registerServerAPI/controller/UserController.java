@@ -10,7 +10,6 @@ import javax.annotation.PostConstruct;
 
 @AllArgsConstructor
 @RestController
-@CrossOrigin(origins = "*")
 public class UserController {
 
     private UserService userService;
