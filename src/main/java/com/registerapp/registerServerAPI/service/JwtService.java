@@ -33,15 +33,15 @@ public class JwtService implements UserDetailsService {
     private AuthenticationManager authenticationManager;
 
     public JwtResponse createJwtToken(JwtRequest jwtRequest) throws Exception {
-        String userEmail = jwtRequest.getUserEmail();
-        String userPassword = jwtRequest.getUserPassword();
-        authenticate(userEmail, userPassword);
+        String email = jwtRequest.getEmail();
+        String password = jwtRequest.getPassword();
+        authenticate(email, password);
 
-        final UserDetails userDetails = loadUserByUsername(userEmail);
+        final UserDetails userDetails = loadUserByUsername(email);
 
         String newGeneratedToken = jwtUtil.generateToken(userDetails);
 
-        User user = userRepository.findByEmail(userEmail);
+        User user = userRepository.findByEmail(email);
 
         return new JwtResponse(user, newGeneratedToken);
     }
@@ -61,9 +61,9 @@ public class JwtService implements UserDetailsService {
         }
     }
 
-    private void authenticate(String userEmail, String userPassword) throws Exception {
+    private void authenticate(String email, String password) throws Exception {
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userEmail, userPassword));
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
         } catch (DisabledException e) {
             throw new Exception("Użytkownik jest dezaktywowany.");
         } catch (BadCredentialsException e) {

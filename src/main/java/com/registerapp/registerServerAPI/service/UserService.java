@@ -4,23 +4,18 @@ import com.registerapp.registerServerAPI.entity.Role;
 import com.registerapp.registerServerAPI.entity.User;
 import com.registerapp.registerServerAPI.repository.RoleRepository;
 import com.registerapp.registerServerAPI.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
-
+@AllArgsConstructor
 @Service
 public class UserService {
 
-    @Autowired
     private UserRepository userRepository;
-
-    @Autowired
     private RoleRepository roleRepository;
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
     //private BCryptPasswordEncoder passwordEncoder;
 
@@ -46,13 +41,16 @@ public class UserService {
     }
 
     public void init() {
-        Role role1 = new Role("ADMIN");
+        Role role1 = new Role(1L, "ADMIN");
         roleRepository.save(role1);
 
-        Role role2 = new Role("USER");
+        Role role2 = new Role(2L, "USER");
         roleRepository.save(role2);
 
-        User user1 = new User("Konrad", "Kalman", "test@test.pl", getEncodedPassword("12345"), Set.of(role1));
+        User user1 = new User(1L,"Konrad", "Kalman", "konrad@kal.pl", getEncodedPassword("12345"), Set.of(role1));
         userRepository.save(user1);
+
+        User user2 = new User(2L,"Kacper", "Kasiński", "kacper@kas.pl", getEncodedPassword("12345"), Set.of(role2));
+        userRepository.save(user2);
     }
 }

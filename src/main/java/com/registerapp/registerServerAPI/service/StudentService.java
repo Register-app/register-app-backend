@@ -2,6 +2,7 @@ package com.registerapp.registerServerAPI.service;
 
 import com.registerapp.registerServerAPI.entity.Student;
 import com.registerapp.registerServerAPI.repository.StudentRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
