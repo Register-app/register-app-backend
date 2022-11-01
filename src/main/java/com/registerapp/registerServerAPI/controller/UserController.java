@@ -20,10 +20,10 @@ public class UserController {
 //        return ResponseEntity.ok("User registered successfully!");
 //    }
 
-    @PostConstruct
-    public void init(){
-        userService.init();
-    }
+//    @PostConstruct
+//    public void init(){
+//        userService.init();
+//    }
 
     @PostMapping({"/registerNewUser"})
     public User registerNewUser(@RequestBody User user){

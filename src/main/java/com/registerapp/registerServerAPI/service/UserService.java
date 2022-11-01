@@ -40,17 +40,17 @@ public class UserService {
         return passwordEncoder.encode(password);
     }
 
-    public void init() {
-        Role role1 = new Role(1L, "ADMIN");
-        roleRepository.save(role1);
-
-        Role role2 = new Role(2L, "USER");
-        roleRepository.save(role2);
-
-        User user1 = new User(1L,"Konrad", "Kalman", "konrad@kal.pl", getEncodedPassword("12345"), Set.of(role1));
-        userRepository.save(user1);
-
-        User user2 = new User(2L,"Kacper", "Kasiński", "kacper@kas.pl", getEncodedPassword("12345"), Set.of(role2));
-        userRepository.save(user2);
-    }
+//    public void init() {
+//        Role role1 = new Role(1L, "ADMIN");
+//        roleRepository.save(role1);
+//
+//        Role role2 = new Role(2L, "USER");
+//        roleRepository.save(role2);
+//
+//        User user1 = new User(1L,"Konrad", "Kalman", "konrad@kal.pl", getEncodedPassword("12345"), Set.of(role1));
+//        userRepository.save(user1);
+//
+//        User user2 = new User(2L,"Kacper", "Kasiński", "kacper@kas.pl", getEncodedPassword("12345"), Set.of(role2));
+//        userRepository.save(user2);
+//    }
 }
