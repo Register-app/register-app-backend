@@ -1,8 +1,8 @@
 package com.registerapp.registerServerAPI.service;
 
 import com.registerapp.registerServerAPI.entity.User;
-import com.registerapp.registerServerAPI.payload.JwtRequest;
-import com.registerapp.registerServerAPI.payload.JwtResponse;
+import com.registerapp.registerServerAPI.payload.request.LoginRequest;
+import com.registerapp.registerServerAPI.payload.response.JwtResponse;
 import com.registerapp.registerServerAPI.repository.UserRepository;
 import com.registerapp.registerServerAPI.service.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +17,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -32,16 +30,25 @@ public class JwtService implements UserDetailsService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public JwtResponse createJwtToken(JwtRequest jwtRequest) throws Exception {
-        String email = jwtRequest.getEmail();
-        String password = jwtRequest.getPassword();
+    public JwtResponse createJwtToken(LoginRequest loginRequest) throws Exception {
+        String email = loginRequest.getEmail();
+        String password = loginRequest.getPassword();
         authenticate(email, password);
 
         final UserDetails userDetails = loadUserByUsername(email);
         String newGeneratedToken = jwtUtil.generateToken(userDetails);
 
         User user = userRepository.findByEmail(email);
-        return new JwtResponse(user, newGeneratedToken);
+        return new JwtResponse(
+                user.getUser_id(),
+                user.getName(),
+                user.getSecond_name(),
+                user.getEmail(),
+                user.getTeacher_id(),
+                user.getGuardian_id(),
+                user.getStudent_id(),
+                user.getRoles(),
+                newGeneratedToken);
     }
 
     @Override
@@ -76,6 +83,4 @@ public class JwtService implements UserDetailsService {
             throw new Exception("INVALID_CREDENTIALS", e);
         }
     }
-
-
 }

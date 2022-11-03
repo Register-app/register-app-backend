@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -36,5 +37,9 @@ public class UserService {
 
     public String getEncodedPassword(String password) {
         return passwordEncoder.encode(password);
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }
