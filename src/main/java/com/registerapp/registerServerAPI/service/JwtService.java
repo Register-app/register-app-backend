@@ -44,9 +44,6 @@ public class JwtService implements UserDetailsService {
                 user.getName(),
                 user.getSecond_name(),
                 user.getEmail(),
-                user.getTeacher_id(),
-                user.getGuardian_id(),
-                user.getStudent_id(),
                 user.getRoles(),
                 newGeneratedToken);
     }

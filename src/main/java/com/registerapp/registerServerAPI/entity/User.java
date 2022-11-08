@@ -34,16 +34,6 @@ public class User {
     @Column(name = "password")
     @JsonIgnore
     private String password;
-
-    @Column(name = "teacher_id")
-    private Long teacher_id;
-
-    @Column(name = "guardian_id")
-    private Long guardian_id;
-
-    @Column(name = "student_id")
-    private Long student_id;
-
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_has_role",
@@ -55,15 +45,6 @@ public class User {
             )
     )
     private Set<Role> roles;
-
-    public User(Long user_id, String name, String second_name, String email, String password, Set<Role> roles) {
-        this.user_id = user_id;
-        this.name = name;
-        this.second_name = second_name;
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
-    }
 
     public User(String name, String second_name, String email, String password, Set<Role> roles) {
         this.name = name;
