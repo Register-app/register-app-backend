@@ -1,7 +1,6 @@
 package com.registerapp.registerServerAPI.repository;
 
 import com.registerapp.registerServerAPI.entity.Message;
-import com.registerapp.registerServerAPI.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

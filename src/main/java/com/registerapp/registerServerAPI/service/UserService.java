@@ -1,15 +1,12 @@
 package com.registerapp.registerServerAPI.service;
 
-import com.registerapp.registerServerAPI.entity.Role;
 import com.registerapp.registerServerAPI.entity.User;
-import com.registerapp.registerServerAPI.repository.RoleRepository;
 import com.registerapp.registerServerAPI.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @AllArgsConstructor
 @Service

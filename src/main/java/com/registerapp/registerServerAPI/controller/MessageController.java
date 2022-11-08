@@ -1,6 +1,5 @@
 package com.registerapp.registerServerAPI.controller;
 
-import com.registerapp.registerServerAPI.entity.Message;
 import com.registerapp.registerServerAPI.payload.request.MessageCreateRequest;
 import com.registerapp.registerServerAPI.payload.request.MessageGetRequest;
 import com.registerapp.registerServerAPI.payload.response.MessageGetResponse;
