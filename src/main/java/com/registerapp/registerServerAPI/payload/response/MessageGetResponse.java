@@ -17,4 +17,6 @@ public class MessageGetResponse {
     private LocalDate date;
     private Long sender_id;
     private Long receiver_id;
+    private String sender_name;
+    private String sender_second_name;
 }

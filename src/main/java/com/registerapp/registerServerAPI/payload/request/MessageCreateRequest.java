@@ -13,10 +13,6 @@ public class MessageCreateRequest {
     @NotBlank
     private String content;
     @NotBlank
-    private LocalTime time;
-    @NotBlank
-    private LocalDate date;
-    @NotBlank
     private Long sender_id;
     @NotBlank
     private Long receiver_id;

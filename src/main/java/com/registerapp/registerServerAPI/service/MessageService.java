@@ -14,7 +14,11 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -28,22 +32,20 @@ public class MessageService {
     public void sendMessage(MessageCreateRequest messageCreateRequest) {
         User user = userRepository.findById(messageCreateRequest.getSender_id()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Nie znaleziono użytkownika o takim id"));
 
-        messageRepository.save(new Message(
+        Message message = messageRepository.save(new Message(
                 messageCreateRequest.getContent(),
-                messageCreateRequest.getTime(),
-                messageCreateRequest.getDate(),
+                LocalTime.now().truncatedTo(ChronoUnit.SECONDS),
+                LocalDate.now(),
                 user,
                 messageCreateRequest.getReceiver_id()
         ));
 
-        simpMessagingTemplate.convertAndSend("/topic/messages/"+ messageCreateRequest.getReceiver_id(), messageCreateRequest);
+        simpMessagingTemplate.convertAndSend("/user/messages/" + messageCreateRequest.getReceiver_id(), mapToMessageGetResponse(message));
     }
 
     public List<MessageGetResponse> getListMessage(MessageGetRequest messageGetRequest) {
         List<Message> messages = messageRepository.findAllByUserIdOrReceiver(messageGetRequest.getSender_id(), messageGetRequest.getReceiver_id());
-
-        return (List<MessageGetResponse>) messages.stream()
-                .map(message -> mapToMessageGetResponse(message));
+        return messages.stream().map(message -> mapToMessageGetResponse(message)).collect(Collectors.toList());
     }
 
     private MessageGetResponse mapToMessageGetResponse(Message message) {
@@ -54,6 +56,8 @@ public class MessageService {
                 .date(message.getDate())
                 .receiver_id(message.getReceiver_id())
                 .sender_id(message.getSender_id().getUser_id())
+                .sender_name(message.getSender_id().getName())
+                .sender_second_name(message.getSender_id().getSecond_name())
                 .build();
     }
 }

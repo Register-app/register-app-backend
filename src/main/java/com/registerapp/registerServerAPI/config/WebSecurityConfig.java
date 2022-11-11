@@ -10,11 +10,16 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.messaging.MessageSecurityMetadataSourceRegistry;
+import org.springframework.security.config.annotation.web.socket.AbstractSecurityWebSocketMessageBrokerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import static org.springframework.messaging.simp.SimpMessageType.MESSAGE;
+import static org.springframework.messaging.simp.SimpMessageType.SUBSCRIBE;
 
 @Configuration
 @EnableWebSecurity
@@ -39,9 +44,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.cors();
-        httpSecurity.csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/swagger-ui/**", "/swagger", "/v3/api-docs/**", "/api/auth/**").permitAll()
+        httpSecurity.csrf().disable();
+        httpSecurity.authorizeRequests()
+                .antMatchers("/swagger-ui/**", "/swagger", "/v3/api-docs/**", "/api/auth/**", "/ws/info", "/ws/**", "/app/**").permitAll()
                 .antMatchers(HttpHeaders.ALLOW).permitAll()
                 .anyRequest().authenticated()
                 .and()
