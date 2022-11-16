@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,7 +46,10 @@ public class MessageService {
 
     public List<MessageGetResponse> getListMessage(MessageGetRequest messageGetRequest) {
         List<Message> messages = messageRepository.findAllByUserIdOrReceiver(messageGetRequest.getSender_id(), messageGetRequest.getReceiver_id());
-        return messages.stream().map(message -> mapToMessageGetResponse(message)).collect(Collectors.toList());
+        return messages.stream()
+                .sorted(Comparator.comparingLong(Message::getMessage_id))
+                .map(message -> mapToMessageGetResponse(message))
+                .collect(Collectors.toList());
     }
 
     private MessageGetResponse mapToMessageGetResponse(Message message) {

@@ -1,68 +1,39 @@
 package com.registerapp.registerServerAPI.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Table
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.List;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 @Entity
+@Table(name = "student")
 public class Student {
     @Id
-    private Long id;
-    private String first_name;
-    private String last_name;
-    private LocalDate date_of_birth;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "student_id")
+    private Long student_id;
 
-    public Student(Long id, String first_name, String last_name, LocalDate date_of_birth) {
-        this.id = id;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.date_of_birth = date_of_birth;
-    }
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user_id;
 
-    public Student() {
-    }
+    @ManyToOne
+    @JoinColumn(name = "class_id")
+    private Class class_id;
 
-    public Long getId() {
-        return id;
-    }
+    @JsonIgnore
+    @OneToMany(mappedBy = "student_id")
+    private List<Grade> grades;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
-    }
-
-    public LocalDate getDate_of_birth() {
-        return date_of_birth;
-    }
-
-    public void setDate_of_birth(LocalDate date_of_birth) {
-        this.date_of_birth = date_of_birth;
-    }
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
-                ", date_of_birth=" + date_of_birth +
-                '}';
+    public Student(User user_id) {
+        this.user_id = user_id;
     }
 }

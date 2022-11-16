@@ -22,7 +22,7 @@ public class UserController {
 //        return ResponseEntity.ok("User registered successfully!");
 //    }
     @GetMapping
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public List<User> getAllUsers(){
         return userService.getAllUsers();
     }

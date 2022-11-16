@@ -1,11 +1,8 @@
 package com.registerapp.registerServerAPI.config;
 
-import com.registerapp.registerServerAPI.entity.Message;
-import com.registerapp.registerServerAPI.entity.Role;
-import com.registerapp.registerServerAPI.entity.User;
-import com.registerapp.registerServerAPI.repository.MessageRepository;
-import com.registerapp.registerServerAPI.repository.RoleRepository;
-import com.registerapp.registerServerAPI.repository.UserRepository;
+import com.registerapp.registerServerAPI.entity.*;
+import com.registerapp.registerServerAPI.entity.Class;
+import com.registerapp.registerServerAPI.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,31 +16,36 @@ import java.util.Set;
 @Configuration
 public class InitConfig {
     @Bean
-    CommandLineRunner commandLineRunner(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, MessageRepository messageRepository){
+    CommandLineRunner commandLineRunner(UserRepository userRepository,
+                                        RoleRepository roleRepository,
+                                        PasswordEncoder passwordEncoder,
+                                        MessageRepository messageRepository,
+                                        ClassRepository classRepository,
+                                        GradeRepository gradeRepository,
+                                        GuardianRepository guardianRepository,
+                                        RegisterRepository registerRepository,
+                                        StudentRepository studentRepository,
+                                        SubjectRepository subjectRepository,
+                                        TeacherRepository teacherRepository){
         return args -> {
 
             Role role1 = new Role(
-                    1L,
                     "ADMIN"
             );
 
             Role role2 = new Role(
-                    2L,
                     "USER"
             );
 
             Role role3 = new Role(
-                    3L,
                     "TEACHER"
             );
 
             Role role4 = new Role(
-                    4L,
                     "GUARDIAN"
             );
 
             Role role5 = new Role(
-                    5L,
                     "STUDENT"
             );
 
@@ -52,16 +54,14 @@ public class InitConfig {
             );
 
             User user1 = new User(
-                    1L,
                     "admin",
                     "admin",
                     "admin@admin.pl",
                     passwordEncoder.encode("12345"),
-                    Set.of(role1, role2)
+                    Set.of(role1)
             );
 
             User user2 = new User(
-                    2L,
                     "user",
                     "user",
                     "user@user.pl",
@@ -70,7 +70,6 @@ public class InitConfig {
             );
 
             User user3 = new User(
-                    3L,
                     "teacher",
                     "teacher",
                     "teacher@teacher.pl",
@@ -79,7 +78,6 @@ public class InitConfig {
             );
 
             User user4 = new User(
-                    4L,
                     "guardian",
                     "guardian",
                     "guardian@guardian.pl",
@@ -88,7 +86,6 @@ public class InitConfig {
             );
 
             User user5 = new User(
-                    5L,
                     "student",
                     "student",
                     "student@student.pl",
@@ -101,7 +98,6 @@ public class InitConfig {
             );
 
             Message message1 = new Message(
-                    1L,
                     "TEST",
                     LocalTime.now(),
                     LocalDate.now(),
@@ -110,7 +106,6 @@ public class InitConfig {
             );
 
             Message message2 = new Message(
-                    2L,
                     "TEST",
                     LocalTime.now(),
                     LocalDate.now(),
@@ -119,7 +114,6 @@ public class InitConfig {
             );
 
             Message message3 = new Message(
-                    3L,
                     "TEST",
                     LocalTime.now(),
                     LocalDate.now(),
@@ -128,7 +122,6 @@ public class InitConfig {
             );
 
             Message message4 = new Message(
-                    4L,
                     "TEST",
                     LocalTime.now(),
                     LocalDate.now(),
@@ -137,7 +130,6 @@ public class InitConfig {
             );
 
             Message message5 = new Message(
-                    5L,
                     "TEST",
                     LocalTime.now(),
                     LocalDate.now(),
@@ -146,7 +138,6 @@ public class InitConfig {
             );
 
             Message message6 = new Message(
-                    6L,
                     "TEST",
                     LocalTime.now(),
                     LocalDate.now(),
@@ -157,6 +148,37 @@ public class InitConfig {
             messageRepository.saveAll(
                     List.of(message1, message2, message3, message4, message5, message6)
             );
+
+            Teacher teacher1 = new Teacher(user3);
+
+            teacherRepository.saveAll(
+                    List.of(teacher1)
+            );
+
+            Student student1 = new Student(user5);
+
+            studentRepository.saveAll(
+                    List.of(student1)
+            );
+
+            Guardian guardian1 = new Guardian(user4);
+
+            guardianRepository.saveAll(
+                    List.of(guardian1)
+            );
+
+            Class class1 = new Class(
+                    "III A",
+                    "2022/2023"
+            );
+
+            classRepository.saveAll(
+                    List.of(class1)
+            );
+
+            student1.setClass_id(class1);
+
+            studentRepository.save(student1);
         };
     }
 }

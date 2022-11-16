@@ -1,18 +1,17 @@
 package com.registerapp.registerServerAPI.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "user")
 public class User {
@@ -34,7 +33,8 @@ public class User {
     @Column(name = "password")
     @JsonIgnore
     private String password;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinTable(
             name = "user_has_role",
             joinColumns = @JoinColumn(
@@ -45,6 +45,32 @@ public class User {
             )
     )
     private Set<Role> roles;
+
+    @JsonIgnore
+    @OneToMany(mappedBy="sender_id")
+    private List<Message> messages;
+
+    @JsonIgnore
+    @OneToOne(mappedBy="user_id")
+    private Student student;
+
+    @JsonIgnore
+    @OneToOne(mappedBy="user_id")
+    private Guardian guardian;
+
+    @JsonIgnore
+    @OneToOne(mappedBy="user_id")
+    private Teacher teacher;
+
+
+    public User(Long user_id, String name, String second_name, String email, String password, Set<Role> roles) {
+        this.user_id = user_id;
+        this.name = name;
+        this.second_name = second_name;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
 
     public User(String name, String second_name, String email, String password, Set<Role> roles) {
         this.name = name;

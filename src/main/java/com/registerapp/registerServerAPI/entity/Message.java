@@ -30,7 +30,7 @@ public class Message {
     @Column(name = "date")
     private LocalDate date;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "sender_id")
     private User sender_id;
 
