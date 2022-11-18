@@ -6,6 +6,7 @@ import com.registerapp.registerServerAPI.payload.response.JwtResponse;
 import com.registerapp.registerServerAPI.repository.UserRepository;
 import com.registerapp.registerServerAPI.service.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -16,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -30,11 +32,11 @@ public class JwtService implements UserDetailsService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public JwtResponse createJwtToken(LoginRequest loginRequest) throws Exception {
+    public JwtResponse createJwtToken(LoginRequest loginRequest) {
         String email = loginRequest.getEmail();
         String password = loginRequest.getPassword();
-        authenticate(email, password);
 
+        authenticate(email, password);
         final UserDetails userDetails = loadUserByUsername(email);
         String newGeneratedToken = jwtUtil.generateToken(userDetails);
 
@@ -44,14 +46,12 @@ public class JwtService implements UserDetailsService {
                 user.getName(),
                 user.getSecond_name(),
                 user.getEmail(),
-                user.getRoles(),
                 newGeneratedToken);
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) {
         User user = userRepository.findByEmail(email);
-
         if(user != null) {
             return new org.springframework.security.core.userdetails.User(
                     user.getEmail(),
@@ -59,7 +59,7 @@ public class JwtService implements UserDetailsService {
                     getAuthority(user)
             );
         } else {
-            throw new UsernameNotFoundException("Email jest nieprawidłowy.");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Użytkownik o emailu: "+ email +" nie istnieje");
         }
     }
 
@@ -71,13 +71,13 @@ public class JwtService implements UserDetailsService {
         return authorities;
     }
 
-    private void authenticate(String email, String password) throws Exception {
+    private void authenticate(String email, String password) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
         } catch (DisabledException e) {
-            throw new Exception("USER_DISABLED", e);
+            throw new ResponseStatusException(HttpStatus.LOCKED, "Użytkownik dezaktywowany");
         } catch (BadCredentialsException e) {
-            throw new Exception("INVALID_CREDENTIALS", e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Niepoprawny email lub hasło");
         }
     }
 }
