@@ -20,9 +20,6 @@ public class Schedule {
     @Column(name = "schedule_id")
     private Long schedule_id;
 
-    @Column(name = "type")
-    private String type;
-
     @Column(name = "date")
     private LocalDateTime date;
 
@@ -33,10 +30,14 @@ public class Schedule {
     @JoinColumn(name = "register_id")
     private Register register_id;
 
-    public Schedule(String type, LocalDateTime date, String comment, Register register_id) {
-        this.type = type;
+    @ManyToOne
+    @JoinColumn(name = "schedule_type_id")
+    private ScheduleType schedule_type_id;
+
+    public Schedule(LocalDateTime date, String comment, Register register_id, ScheduleType schedule_type_id) {
         this.date = date;
         this.comment = comment;
         this.register_id = register_id;
+        this.schedule_type_id = schedule_type_id;
     }
 }

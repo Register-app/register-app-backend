@@ -23,9 +23,6 @@ public class Attendance {
     @Column(name = "date")
     private LocalDateTime date;
 
-    @Column(name = "type")
-    private String type;
-
     @ManyToOne
     @JoinColumn(name = "student_id")
     private Student student_id;
@@ -34,10 +31,14 @@ public class Attendance {
     @JoinColumn(name = "register_id")
     private Register register_id;
 
-    public Attendance(LocalDateTime date, String type, Student student_id, Register register_id) {
+    @ManyToOne
+    @JoinColumn(name = "attendance_type_id")
+    private AttendanceType attendance_type_id;
+
+    public Attendance(LocalDateTime date, Student student_id, Register register_id, AttendanceType attendance_type_id) {
         this.date = date;
-        this.type = type;
         this.student_id = student_id;
         this.register_id = register_id;
+        this.attendance_type_id = attendance_type_id;
     }
 }

@@ -19,12 +19,6 @@ public class Grade {
     @Column(name = "grade_id")
     private Long grade_id;
 
-    @Column(name = "text")
-    private String text;
-
-    @Column(name = "value")
-    private Float value;
-
     @Column(name = "weight")
     private Number weight;
 
@@ -34,9 +28,6 @@ public class Grade {
     @Column(name = "date")
     private LocalDateTime date;
 
-    @Column(name = "category")
-    private String category;
-
     @ManyToOne
     @JoinColumn(name = "student_id")
     private Student student_id;
@@ -45,14 +36,21 @@ public class Grade {
     @JoinColumn(name = "register_id")
     private Register register_id;
 
-    public Grade(String text, Float value, Number weight, String comment, LocalDateTime date, String category, Student student_id, Register register_id) {
-        this.text = text;
-        this.value = value;
+    @ManyToOne
+    @JoinColumn(name = "grade_type_id")
+    private GradeType grade_type_id;
+
+    @ManyToOne
+    @JoinColumn(name = "grade_value_id")
+    private GradeValue grade_value_id;
+
+    public Grade(Number weight, String comment, LocalDateTime date, Student student_id, Register register_id, GradeType grade_type_id, GradeValue grade_value_id) {
         this.weight = weight;
         this.comment = comment;
         this.date = date;
-        this.category = category;
         this.student_id = student_id;
         this.register_id = register_id;
+        this.grade_type_id = grade_type_id;
+        this.grade_value_id = grade_value_id;
     }
 }
