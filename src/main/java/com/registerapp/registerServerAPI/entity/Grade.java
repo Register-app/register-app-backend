@@ -31,8 +31,8 @@ public class Grade {
     @Column(name = "comment")
     private String comment;
 
-    @Column(name = "date_time")
-    private LocalDateTime date_time;
+    @Column(name = "date")
+    private LocalDateTime date;
 
     @Column(name = "category")
     private String category;
@@ -44,4 +44,15 @@ public class Grade {
     @ManyToOne
     @JoinColumn(name = "register_id")
     private Register register_id;
+
+    public Grade(String text, Float value, Number weight, String comment, LocalDateTime date, String category, Student student_id, Register register_id) {
+        this.text = text;
+        this.value = value;
+        this.weight = weight;
+        this.comment = comment;
+        this.date = date;
+        this.category = category;
+        this.student_id = student_id;
+        this.register_id = register_id;
+    }
 }

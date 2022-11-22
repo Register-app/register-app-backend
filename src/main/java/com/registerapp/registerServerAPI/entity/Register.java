@@ -40,6 +40,14 @@ public class Register {
     @OneToMany(mappedBy = "register_id")
     private List<Grade> grades;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "register_id")
+    private List<Schedule> schedules;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "register_id")
+    private List<Attendance> attendances;
+
     public Register(Teacher teacher_id, Subject subject_id, Class class_id, Boolean is_supervising_teacher) {
         this.teacher_id = teacher_id;
         this.subject_id = subject_id;

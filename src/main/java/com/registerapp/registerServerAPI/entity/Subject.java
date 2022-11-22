@@ -24,19 +24,11 @@ public class Subject {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "day")
-    private String day;
-
-    @Column(name = "time")
-    private LocalTime time;
-
     @JsonIgnore
     @OneToOne(mappedBy = "subject_id")
     private Register register;
 
-    public Subject(String name, String day, LocalTime time) {
+    public Subject(String name) {
         this.name = name;
-        this.day = day;
-        this.time = time;
     }
 }
