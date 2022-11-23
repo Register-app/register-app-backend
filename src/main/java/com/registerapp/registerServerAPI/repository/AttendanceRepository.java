@@ -5,11 +5,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
 public interface AttendanceRepository  extends JpaRepository<Attendance, Long> {
 
-    @Query(value = "SELECT * FROM attendance a WHERE a.user_id = ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM attendance WHERE student_id = ?1", nativeQuery = true)
     List<Attendance> findAllByStudent_id(Long student_id);
+    @Query(value = "SELECT * FROM attendance a INNER JOIN register r ON a.register_id=r.register_id INNER JOIN schedule s ON s.register_id=r.register_id WHERE a.student_id = ?1 AND Date(s.date)=Date(?2) ORDER BY s.date", nativeQuery = true)
+    List<Attendance> findStudentAttendanceByDate(Long student_id, LocalDateTime date);
 }
