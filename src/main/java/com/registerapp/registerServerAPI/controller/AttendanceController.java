@@ -25,7 +25,8 @@ public class AttendanceController {
 //
 //     }
 
-    @GetMapping("/attendance/{student_id}/{date}")
+    @GetMapping("/student/{student_id}/date/{date}")
+    @PreAuthorize("hasAnyRole('STUDENT')")
     public ResponseEntity<?> getStudentAttendance(@PathVariable Long student_id, @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime ldt) {
         return ResponseEntity.ok(attendanceService.getStudentAttendance(student_id, ldt));
     }
