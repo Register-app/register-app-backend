@@ -3,11 +3,9 @@ package com.registerapp.registerServerAPI.controller;
 import com.registerapp.registerServerAPI.entity.User;
 import com.registerapp.registerServerAPI.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.PostConstruct;
-import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -23,8 +21,8 @@ public class UserController {
 //    }
     @GetMapping
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-    public List<User> getAllUsers(){
-        return userService.getAllUsers();
+    public ResponseEntity<?> getAllUsers() throws Exception {
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 
 //    @PostMapping({"/registerNewUser"})
