@@ -7,7 +7,6 @@ import lombok.Data;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@AllArgsConstructor
 @Data
 @Builder
 public class MessageGetResponse {

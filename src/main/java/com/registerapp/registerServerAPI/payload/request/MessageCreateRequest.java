@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Data
-@AllArgsConstructor
 public class MessageCreateRequest {
     @NotBlank
     private String content;

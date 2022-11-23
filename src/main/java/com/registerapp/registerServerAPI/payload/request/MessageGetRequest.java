@@ -6,7 +6,6 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 @Data
-@AllArgsConstructor
 public class MessageGetRequest {
     @NotBlank
     private Long sender_id;
