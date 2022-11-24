@@ -3,6 +3,7 @@ package com.registerapp.registerServerAPI.payload.response;
 import com.registerapp.registerServerAPI.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.lang.Nullable;
 
 import java.util.Set;
 

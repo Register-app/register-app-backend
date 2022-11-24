@@ -44,8 +44,8 @@ public class MessageService {
         simpMessagingTemplate.convertAndSend("/user/messages/" + messageCreateRequest.getReceiver_id(), mapToMessageGetResponse(message));
     }
 
-    public List<MessageGetResponse> getListMessage(MessageGetRequest messageGetRequest) {
-        List<Message> messages = messageRepository.findAllByUserIdOrReceiver(messageGetRequest.getSender_id(), messageGetRequest.getReceiver_id());
+    public List<MessageGetResponse> getListMessage(Long sender_id, Long receiver_id) {
+        List<Message> messages = messageRepository.findAllByUserIdOrReceiver(sender_id, receiver_id);
         return messages.stream()
                 .sorted(Comparator.comparingLong(Message::getMessage_id))
                 .map(message -> mapToMessageGetResponse(message))
