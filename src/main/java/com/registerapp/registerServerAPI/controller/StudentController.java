@@ -31,7 +31,7 @@ public class StudentController {
 
     @GetMapping("/class/{class_id}")
     @PreAuthorize("hasAnyRole('TEACHER')")
-    public ResponseEntity<?> getListStudent(@PathVariable Long class_id) throws Exception {
-        return ResponseEntity.ok(studentService.getListStudent(class_id));
+    public ResponseEntity<?> getStudentsByClass(@PathVariable Long class_id) throws Exception {
+        return ResponseEntity.ok(studentService.getStudentsByClass(class_id));
     }
 }

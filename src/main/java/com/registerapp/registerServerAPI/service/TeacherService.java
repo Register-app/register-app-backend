@@ -16,8 +16,8 @@ public class TeacherService {
 
     private TeacherRepository teacherRepository;
 
-    public GetTeacherByUserIdResponse getTeacherByUser_id(Long user_id) {
-        Optional<Teacher> teacher = teacherRepository.findByUser_id(user_id);
+    public GetTeacherByUserIdResponse getTeacherByUser(Long user_id) {
+        Optional<Teacher> teacher = teacherRepository.findByUser(user_id);
 
         return teacher.map(tch -> mapTeacherToGetTeacherByUserIdResponse(tch)).get();
     }

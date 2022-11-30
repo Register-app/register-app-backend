@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,7 +28,7 @@ public class GradeValue {
 
     @JsonIgnore
     @OneToMany(mappedBy = "grade_value_id")
-    private List<Grade> grades;
+    private Set<Grade> grades;
 
     public GradeValue(Float value, String text) {
         this.value = value;

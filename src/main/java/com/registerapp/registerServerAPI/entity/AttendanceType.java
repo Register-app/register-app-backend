@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,7 +25,7 @@ public class AttendanceType {
 
     @JsonIgnore
     @OneToMany(mappedBy = "attendance_type_id")
-    private List<Attendance> attendances;
+    private Set<Attendance> attendances;
 
     public AttendanceType(String name) {
         this.name = name;

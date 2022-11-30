@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -14,12 +15,7 @@ public class ClassService {
 
     private ClassRepository classRepository;
 
-
-    public List<Class> getListClass(Long teacher_id) {
-        List<Class> classes = classRepository.findAllByTeacher_id(teacher_id);
-
-        return classes.stream()
-                .distinct()
-                .collect(Collectors.toList());
+    public Set<Class> getClassesByTeacher(Long teacher_id) {
+        return classRepository.findAllByTeacher(teacher_id);
     }
 }

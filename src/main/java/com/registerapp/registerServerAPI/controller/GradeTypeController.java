@@ -1,7 +1,7 @@
 package com.registerapp.registerServerAPI.controller;
 
-
-import com.registerapp.registerServerAPI.service.TeacherService;
+import com.registerapp.registerServerAPI.service.GradeTypeService;
+import com.registerapp.registerServerAPI.service.SubjectService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/v1/teachers")
-public class TeacherController {
+@RequestMapping("/api/v1/grade-types")
+public class GradeTypeController {
 
-    private TeacherService teacherService;
+    private GradeTypeService gradeTypeService;
 
-    @GetMapping("/user/{user_id}")
-    @PreAuthorize("hasAnyRole('TEACHER')")
-    public ResponseEntity<?> getTeacherByUser(@PathVariable Long user_id) throws Exception {
-        return ResponseEntity.ok(teacherService.getTeacherByUser(user_id));
+    @GetMapping
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    public ResponseEntity<?> getGradeTypes() throws Exception {
+        return ResponseEntity.ok(gradeTypeService.getGradeTypes());
     }
 }

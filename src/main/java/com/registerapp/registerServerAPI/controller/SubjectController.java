@@ -1,7 +1,7 @@
 package com.registerapp.registerServerAPI.controller;
 
-
-import com.registerapp.registerServerAPI.service.TeacherService;
+import com.registerapp.registerServerAPI.service.ClassService;
+import com.registerapp.registerServerAPI.service.SubjectService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/v1/teachers")
-public class TeacherController {
+@RequestMapping("/api/v1/subjects")
+public class SubjectController {
 
-    private TeacherService teacherService;
+    private SubjectService subjectService;
 
-    @GetMapping("/user/{user_id}")
+    @GetMapping("/teacher/{teacher_id}/class/{class_id}")
     @PreAuthorize("hasAnyRole('TEACHER')")
-    public ResponseEntity<?> getTeacherByUser(@PathVariable Long user_id) throws Exception {
-        return ResponseEntity.ok(teacherService.getTeacherByUser(user_id));
+    public ResponseEntity<?> getSubjectsByTeacherAndClass(@PathVariable Long teacher_id, @PathVariable Long class_id) throws Exception {
+        return ResponseEntity.ok(subjectService.getSubjectsByTeacherAndClass(teacher_id, class_id));
     }
 }
