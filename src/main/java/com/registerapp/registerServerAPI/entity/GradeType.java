@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,14 +20,18 @@ public class GradeType {
     @Column(name = "grade_type_id")
     private Long grade_type_id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "value")
+    private String value;
+
+    @Column(name = "text")
+    private String text;
 
     @JsonIgnore
     @OneToMany(mappedBy = "grade_type_id")
-    private List<Grade> grades;
+    private Set<Grade> grades;
 
-    public GradeType(String name) {
-        this.name = name;
+    public GradeType(String value, String text) {
+        this.value = value;
+        this.text = text;
     }
 }

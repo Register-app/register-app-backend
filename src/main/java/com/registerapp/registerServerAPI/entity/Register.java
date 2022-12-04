@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,7 +25,7 @@ public class Register {
     @JoinColumn(name = "teacher_id")
     private Teacher teacher_id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "subject_id")
     private Subject subject_id;
 
@@ -37,15 +38,15 @@ public class Register {
 
     @JsonIgnore
     @OneToMany(mappedBy = "register_id")
-    private List<Grade> grades;
+    private Set<Grade> grades;
 
     @JsonIgnore
     @OneToMany(mappedBy = "register_id")
-    private List<Schedule> schedules;
+    private Set<Schedule> schedules;
 
     @JsonIgnore
     @OneToMany(mappedBy = "register_id")
-    private List<Attendance> attendances;
+    private Set<Attendance> attendances;
 
     public Register(Teacher teacher_id, Subject subject_id, Class class_id, Boolean is_supervising_teacher) {
         this.teacher_id = teacher_id;

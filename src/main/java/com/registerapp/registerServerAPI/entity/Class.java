@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,11 +29,11 @@ public class Class {
 
     @JsonIgnore
     @OneToMany(mappedBy="class_id")
-    private List<Student> students;
+    private Set<Student> students;
 
     @JsonIgnore
     @OneToMany(mappedBy="class_id")
-    private List<Register> registers;
+    private Set<Register> registers;
 
     public Class(String name, String school_year) {
         this.name = name;

@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,7 +25,7 @@ public class ScheduleType {
 
     @JsonIgnore
     @OneToMany(mappedBy = "schedule_type_id")
-    private List<Schedule> schedules;
+    private Set<Schedule> schedules;
 
     public ScheduleType(String name) {
         this.name = name;

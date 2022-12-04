@@ -23,9 +23,9 @@ public class MessageController {
     public void sendMessage(@Payload MessageCreateRequest messageCreateRequest) throws Exception {
         messageService.sendMessage(messageCreateRequest);
     }
-    @PostMapping("/listmessage")
+    @GetMapping("/sender/{sender_id}/receiver/{receiver_id}")
     @PreAuthorize("hasAnyRole('USER')")
-    public ResponseEntity<?> getListMessage(@Valid @RequestBody MessageGetRequest messageGetRequest) throws Exception {
-        return ResponseEntity.ok(messageService.getListMessage(messageGetRequest));
+    public ResponseEntity<?> getListMessage(@PathVariable Long sender_id, @PathVariable Long receiver_id) throws Exception {
+        return ResponseEntity.ok(messageService.getListMessage(sender_id, receiver_id));
     }
 }

@@ -24,8 +24,8 @@ public class StudentService {
 //        return studentRepository.findById(id).orElseThrow();
 //    }
 
-    public List<StudentGetResponse> getListStudent(Long class_id) {
-        List<Student> students = studentRepository.findAllByClass_id(class_id);
+    public List<StudentGetResponse> getStudentsByClass(Long class_id) {
+        List<Student> students = studentRepository.findAllByClass(class_id);
 
         return students.stream()
                 .map(std -> mapToStudentGetResponse(std))

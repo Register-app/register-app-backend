@@ -7,6 +7,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,7 +31,7 @@ public class Student {
 
     @JsonIgnore
     @OneToMany(mappedBy = "student_id")
-    private List<Grade> grades;
+    private Set<Grade> grades;
 
     public Student(User user_id) {
         this.user_id = user_id;

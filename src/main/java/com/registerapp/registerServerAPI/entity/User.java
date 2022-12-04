@@ -49,7 +49,7 @@ public class User {
 
     @JsonIgnore
     @OneToMany(mappedBy="sender_id")
-    private List<Message> messages;
+    private Set<Message> messages;
 
     @JsonIgnore
     @OneToOne(mappedBy="user_id")

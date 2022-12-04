@@ -7,6 +7,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,8 +25,8 @@ public class Subject {
     private String name;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "subject_id")
-    private Register register;
+    @OneToMany(mappedBy = "subject_id")
+    private Set<Register> registers;
 
     public Subject(String name) {
         this.name = name;
