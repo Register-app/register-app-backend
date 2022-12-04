@@ -25,6 +25,12 @@ public class AttendanceService {
                     .map(attd -> mapToAttendanceGetResponse(attd))
                     .collect(Collectors.toList());
     }
+    public List<AttendanceGetResponse> getClassAttendance(Long class_id, LocalDateTime date) {
+        List<Attendance> attendanceList =  attendanceRepository.findClassAttendanceByDate(class_id, date);
+        return attendanceList.stream()
+                .map(attd -> mapToAttendanceGetResponse(attd))
+                .collect(Collectors.toList());
+    }
 
     private AttendanceGetResponse mapToAttendanceGetResponse(Attendance attd) {
             return AttendanceGetResponse.builder()

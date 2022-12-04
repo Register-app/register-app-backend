@@ -16,6 +16,8 @@ public interface AttendanceRepository  extends JpaRepository<Attendance, Long> {
     @Query(value = "SELECT * FROM attendance a INNER JOIN register r ON a.register_id=r.register_id INNER JOIN schedule s ON s.register_id=r.register_id WHERE a.student_id = ?1 AND Date(s.date)=Date(?2) ORDER BY s.date", nativeQuery = true)
     List<Attendance> findStudentAttendanceByDate(Long student_id, LocalDateTime date);
 
+    @Query(value = "SELECT * FROM attendance a INNER JOIN register r ON a.register_id=r.register_id INNER JOIN schedule s ON s.register_id=r.register_id WHERE r.class_id = ?1 AND Date(s.date)=Date(?2) ORDER BY s.date", nativeQuery = true)
+    List<Attendance> findClassAttendanceByDate(Long class_id, LocalDateTime date);
 
 
 

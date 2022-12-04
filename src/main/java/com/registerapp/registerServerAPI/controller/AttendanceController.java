@@ -19,11 +19,7 @@ public class AttendanceController {
 
     private final AttendanceService attendanceService;
 
-//     @GetMapping("/attendance/{student_id}/{date}")
-//     public List<Attendance> getStudentAttendance(@PathVariable Long student_id, @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime ldt) {
-//         return attendanceService.getStudentAttendance(student_id, ldt);
-//
-//     }
+
 
     @GetMapping("/student/{student_id}/date/{date}")
     @PreAuthorize("hasAnyRole('STUDENT')")
@@ -31,20 +27,10 @@ public class AttendanceController {
         return ResponseEntity.ok(attendanceService.getStudentAttendance(student_id, ldt));
     }
 
-
-
-//        @GetMapping("/attendance/{student_id}/{date}")
-//        public List<Attendance> getStudentAttendance(@PathVariable Long student_id, @PathVariable LocalDateTime date) {
-//            return attendanceService.getStudentAttendance(student_id, date);
-//        }
-
-//    public List<Student> getStudents(){
-//        return studentService.getStudents();
-//    }
-//
-//    @GetMapping("/students/{id}")
-//    public Student getStudent(@PathVariable Long id){
-//        return studentService.getSingleStudent(id);
-//    }
+    @GetMapping("/class/{class_id}/date/{date}")
+    @PreAuthorize("hasAnyRole('TEACHER')")
+    public ResponseEntity<?> getClassAttendance(@PathVariable Long class_id, @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime ldt) {
+        return ResponseEntity.ok(attendanceService.getClassAttendance(class_id, ldt));
+    }
 
 }
