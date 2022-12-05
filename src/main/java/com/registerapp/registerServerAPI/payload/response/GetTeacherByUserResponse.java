@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 @Builder
-public class GetTeacherByUserIdResponse {
+public class GetTeacherByUserResponse {
     private Long teacher_id;
 }
