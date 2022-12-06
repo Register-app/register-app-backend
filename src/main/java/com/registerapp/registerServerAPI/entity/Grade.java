@@ -19,7 +19,7 @@ public class Grade {
     private Long grade_id;
 
     @Column(name = "weight")
-    private Number weight;
+    private Integer weight;
 
     @Column(name = "comment")
     private String comment;
@@ -43,7 +43,7 @@ public class Grade {
     @JoinColumn(name = "grade_value_id")
     private GradeValue grade_value_id;
 
-    public Grade(Number weight, String comment, LocalDateTime date, Student student_id, Register register_id, GradeType grade_type_id, GradeValue grade_value_id) {
+    public Grade(Integer weight, String comment, LocalDateTime date, Student student_id, Register register_id, GradeType grade_type_id, GradeValue grade_value_id) {
         this.weight = weight;
         this.comment = comment;
         this.date = date;
