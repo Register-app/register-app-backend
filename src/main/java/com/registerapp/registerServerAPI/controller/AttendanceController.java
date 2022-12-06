@@ -32,5 +32,9 @@ public class AttendanceController {
     public ResponseEntity<?> getClassAttendance(@PathVariable Long class_id, @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime ldt) {
         return ResponseEntity.ok(attendanceService.getClassAttendance(class_id, ldt));
     }
-
+    @GetMapping("/class/{class_id}/date/{date}/subject/{subject_id}")
+    @PreAuthorize("hasAnyRole('TEACHER')")
+    public ResponseEntity<?> getClassAttendanceBySubjectId(@PathVariable Long class_id, @PathVariable Long subject_id, @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime ldt) {
+        return ResponseEntity.ok(attendanceService.getClassAttendanceBySubjectId(class_id, subject_id, ldt));
+    }
 }

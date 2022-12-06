@@ -41,4 +41,12 @@ public class AttendanceService {
                     .date(attd.getDate())
                     .build();
     }
+
+    public Object getClassAttendanceBySubjectId(Long class_id, Long subject_id, LocalDateTime date) {
+        List<Attendance> attendanceList =  attendanceRepository.findClassAttendanceBySubject(class_id, subject_id, date);
+        return attendanceList.stream()
+                .map(attd -> mapToAttendanceGetResponse(attd))
+                .collect(Collectors.toList());
+    }
 }
+

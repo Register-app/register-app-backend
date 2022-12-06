@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 @Builder
 public class ScheduleGetResponse {
     private Long schedule_id;
-    private Long student_id;
     private Long teacher_id;
     private Long register_id;
     private String subject;
