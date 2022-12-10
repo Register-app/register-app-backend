@@ -34,4 +34,10 @@ public class StudentController {
     public ResponseEntity<?> getStudentsByClass(@PathVariable Long class_id) throws Exception {
         return ResponseEntity.ok(studentService.getStudentsByClass(class_id));
     }
+
+    @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public ResponseEntity<?> getStudents() throws Exception {
+        return ResponseEntity.ok(studentService.getStudents());
+    }
 }

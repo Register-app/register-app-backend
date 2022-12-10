@@ -3,10 +3,14 @@ package com.registerapp.registerServerAPI.service;
 import com.registerapp.registerServerAPI.entity.User;
 import com.registerapp.registerServerAPI.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -37,6 +41,8 @@ public class UserService {
     }
 
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        List<User> users = userRepository.findAll();
+        return users.stream().sorted(Comparator.comparing(User::getSecond_name))
+                .collect(Collectors.toList());
     }
 }

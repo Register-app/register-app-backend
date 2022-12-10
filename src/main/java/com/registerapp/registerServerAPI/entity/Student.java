@@ -1,12 +1,9 @@
 package com.registerapp.registerServerAPI.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -32,6 +29,10 @@ public class Student {
     @JsonIgnore
     @OneToMany(mappedBy = "student_id")
     private Set<Grade> grades;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "students")
+    private Set<Guardian> guardians;
 
     public Student(User user_id) {
         this.user_id = user_id;

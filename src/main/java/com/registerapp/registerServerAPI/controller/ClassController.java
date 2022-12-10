@@ -18,4 +18,10 @@ public class ClassController {
     public ResponseEntity<?> getClassesByTeacher(@PathVariable Long teacher_id) throws Exception {
         return ResponseEntity.ok(classService.getClassesByTeacher(teacher_id));
     }
+
+    @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public ResponseEntity<?> getClasses() throws Exception {
+        return ResponseEntity.ok(classService.getClasses());
+    }
 }
