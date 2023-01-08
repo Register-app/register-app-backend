@@ -1,10 +1,12 @@
 package com.registerapp.registerServerAPI.payload.request;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
+@Builder
 public class GradeAddRequest {
     private Integer weight;
     private String comment;

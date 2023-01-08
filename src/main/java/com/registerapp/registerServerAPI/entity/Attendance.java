@@ -22,7 +22,7 @@ public class Attendance {
     @Column(name = "date")
     private LocalDateTime date;
 
-    @ManyToOne
+    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, fetch = FetchType.EAGER)
     @JoinColumn(name = "student_id")
     private Student student_id;
 

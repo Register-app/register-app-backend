@@ -1,17 +1,12 @@
 package com.registerapp.registerServerAPI.payload.request;
 
-import lombok.*;
-
-import javax.validation.constraints.NotBlank;
+import lombok.Data;
 
 @Data
-public class UserRegistrationRequest {
-    @NotBlank
+public class UserUpdateRequest {
+    private Long user_id;
     private String name;
-    @NotBlank
     private String second_name;
-    @NotBlank
     private String email;
-    @NotBlank
     private String password;
 }

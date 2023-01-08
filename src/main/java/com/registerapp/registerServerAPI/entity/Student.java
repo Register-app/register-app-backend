@@ -11,6 +11,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "student")
 public class Student {
     @Id
@@ -31,10 +32,30 @@ public class Student {
     private Set<Grade> grades;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "students")
+    @OneToMany(mappedBy = "student_id")
+    private Set<Attendance> attendances;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "students", cascade = CascadeType.ALL)
     private Set<Guardian> guardians;
+
+    public Student(User user_id, Class class_id, Set<Guardian> guardians) {
+        this.user_id = user_id;
+        this.class_id = class_id;
+        this.guardians = guardians;
+    }
 
     public Student(User user_id) {
         this.user_id = user_id;
+    }
+
+    public Student(User user_id, Class class_id) {
+        this.user_id = user_id;
+        this.class_id = class_id;
+    }
+
+    public Student(User user_id, Set<Guardian> guardians) {
+        this.user_id = user_id;
+        this.guardians = guardians;
     }
 }

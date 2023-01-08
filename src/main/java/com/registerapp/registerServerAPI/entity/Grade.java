@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
+@Builder
 @Table(name = "grade")
 public class Grade {
 
@@ -27,7 +28,7 @@ public class Grade {
     @Column(name = "date")
     private LocalDateTime date;
 
-    @ManyToOne
+    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, fetch = FetchType.EAGER)
     @JoinColumn(name = "student_id")
     private Student student_id;
 
