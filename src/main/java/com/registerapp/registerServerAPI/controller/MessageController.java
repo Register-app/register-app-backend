@@ -24,7 +24,7 @@ public class MessageController {
         messageService.sendMessage(messageCreateRequest);
     }
     @GetMapping("/sender/{sender_id}/receiver/{receiver_id}")
-    @PreAuthorize("hasAnyRole('USER')")
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<?> getListMessage(@PathVariable Long sender_id, @PathVariable Long receiver_id) throws Exception {
         return ResponseEntity.ok(messageService.getListMessage(sender_id, receiver_id));
     }
