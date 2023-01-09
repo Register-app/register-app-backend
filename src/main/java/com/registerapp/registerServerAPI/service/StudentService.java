@@ -22,15 +22,6 @@ public class StudentService {
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private ClassRepository classRepository;
-    private GuardianRepository guardianRepository;
-
-//    public List<Student> getStudents() {
-//        return studentRepository.findAll();
-//    }
-//
-//    public Student getSingleStudent(Long id) {
-//        return studentRepository.findById(id).orElseThrow();
-//    }
 
     public List<StudentGetResponse> getStudentsByClass(Long class_id) {
         List<Student> students = studentRepository.findAllByClass(class_id);
@@ -74,25 +65,13 @@ public class StudentService {
         if(studentAddRequest.getClass_id() != null && studentAddRequest.getClass_id().toString() != "") {
             class_ = classRepository.findById(studentAddRequest.getClass_id());
         }
-        List<Guardian> guardians = guardianRepository.findAllById(studentAddRequest.getGuardian_id());
 
         Student student;
 
-        if( class_ != null && !guardians.isEmpty() ) {
-            student = studentRepository.save(new Student(
-                user,
-                    class_.get(),
-                    Set.copyOf(guardians)
-            ));
-        } else if (class_ != null && guardians.isEmpty()) {
+        if (class_ != null) {
             student = studentRepository.save(new Student(
                     user,
                     class_.get()
-            ));
-        } else if (class_ == null && guardians.isEmpty()) {
-            student = studentRepository.save(new Student(
-                    user,
-                    Set.copyOf(guardians)
             ));
         } else {
             student = studentRepository.save(new Student(
@@ -121,36 +100,11 @@ public class StudentService {
         if(studentUpdateRequest.getClass_id() != null && studentUpdateRequest.getClass_id().toString() != "") {
             class_ = classRepository.findById(studentUpdateRequest.getClass_id());
         }
-        List<Guardian> guardians = guardianRepository.findAllById(studentUpdateRequest.getGuardian_id());
 
         if(studentUpdateRequest.getClass_id() != null
                 && studentUpdateRequest.getClass_id().toString() != ""
                 && !Objects.equals(student.getClass_id().getClass_id(), class_.get().getClass_id())) {
             student.setClass_id(class_.get());
-        }
-
-        if(studentUpdateRequest.getGuardian_id() != null
-                && !studentUpdateRequest.getGuardian_id().isEmpty()){
-            List<Long> l1 = guardians.stream().map(grd -> grd.getGuardian_id()).collect(Collectors.toList());
-            List<Long> l2 = student.getGuardians().stream().map(grd -> grd.getGuardian_id()).collect(Collectors.toList());
-            l1.stream().sorted();
-            l2.stream().sorted();
-
-            System.out.println("\n");
-            System.out.println("\n");
-            l1.stream().forEach(el -> System.out.println(el));
-            System.out.println("\n");
-            System.out.println("\n");
-            l2.stream().forEach(el -> System.out.println(el));
-            System.out.println("\n");
-            System.out.println("\n");
-
-            if(!l1.equals(l2)) {
-                student.setGuardians(Set.copyOf(guardians));
-            }
-
-            System.out.println(student.getGuardians());
-
         }
 
         studentRepository.saveAndFlush(student);

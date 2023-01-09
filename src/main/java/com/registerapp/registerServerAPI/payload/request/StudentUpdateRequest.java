@@ -8,5 +8,4 @@ import java.util.List;
 public class StudentUpdateRequest {
     private Long student_id;
     private Long class_id;
-    private List<Long> guardian_id;
 }

@@ -11,5 +11,4 @@ import java.util.Set;
 public class StudentAddRequest {
     private Long user_id;
     private Long class_id;
-    private List<Long> guardian_id;
 }
