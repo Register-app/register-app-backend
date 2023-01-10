@@ -18,6 +18,12 @@ public class ScheduleController {
     @GetMapping("/student/{student_id}/date/{date}")
     @PreAuthorize("hasAnyRole('STUDENT')")
     public ResponseEntity<?> getStudentSchedule(@PathVariable Long student_id, @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime ldt) {
-        return ResponseEntity.ok(scheduleService.getStudentAttendance(student_id, ldt));
+        return ResponseEntity.ok(scheduleService.getStudentSchedule(student_id, ldt));
+    }
+
+    @GetMapping("/class/{class_id}/date/{date}")
+    @PreAuthorize("hasAnyRole('TEACHER')")
+    public ResponseEntity<?> getClassSchedule(@PathVariable Long class_id, @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime ldt) {
+        return ResponseEntity.ok(scheduleService.getClassSchedule(class_id, ldt));
     }
 }
