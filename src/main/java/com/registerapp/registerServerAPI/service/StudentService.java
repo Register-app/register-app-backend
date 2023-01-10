@@ -30,6 +30,9 @@ public class StudentService {
                 .map(std -> mapToStudentGetResponse(std))
                 .collect(Collectors.toList());
     }
+        public Student getSingleStudent(Long id) {
+        return studentRepository.findById(id).orElseThrow();
+    }
 
     private StudentGetResponse mapToStudentGetResponse(Student std) {
         return StudentGetResponse.builder()

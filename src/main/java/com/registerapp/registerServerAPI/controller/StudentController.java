@@ -25,10 +25,10 @@ public class StudentController {
 //        return studentService.getStudents();
 //    }
 //
-//    @GetMapping("/students/{id}")
-//    public Student getStudent(@PathVariable Long id){
-//        return studentService.getSingleStudent(id);
-//    }
+    @GetMapping("/user/{id}")
+    public Student getStudent(@PathVariable Long id){
+        return studentService.getSingleStudent(id);
+    }
 
     @GetMapping("/class/{class_id}")
     @PreAuthorize("hasAnyRole('TEACHER')")
