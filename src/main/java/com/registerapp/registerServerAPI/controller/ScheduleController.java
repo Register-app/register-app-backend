@@ -26,4 +26,9 @@ public class ScheduleController {
     public ResponseEntity<?> getClassSchedule(@PathVariable Long class_id, @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime ldt) {
         return ResponseEntity.ok(scheduleService.getClassSchedule(class_id, ldt));
     }
+    @GetMapping("/teacher/{teacher_id}/date/{date}")
+    @PreAuthorize("hasAnyRole('TEACHER')")
+    public ResponseEntity<?> getTeacherSchedule(@PathVariable Long teacher_id, @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime ldt) {
+        return ResponseEntity.ok(scheduleService.getTeacherSchedule(teacher_id, ldt));
+    }
 }

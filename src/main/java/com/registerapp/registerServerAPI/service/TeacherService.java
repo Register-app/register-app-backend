@@ -1,5 +1,6 @@
 package com.registerapp.registerServerAPI.service;
 
+import com.registerapp.registerServerAPI.entity.Student;
 import com.registerapp.registerServerAPI.entity.Teacher;
 import com.registerapp.registerServerAPI.payload.response.GetTeacherByUserResponse;
 import com.registerapp.registerServerAPI.repository.TeacherRepository;
@@ -21,6 +22,9 @@ public class TeacherService {
                 .teacher_id(teacher.getTeacher_id())
                 .build();
     }
-
+//    public Teacher getSingleTeacher(Long id) {
+//        return teacherRepository.findById(id).orElseThrow();
+//    }
+//
 
 }

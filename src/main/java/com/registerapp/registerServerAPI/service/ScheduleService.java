@@ -22,6 +22,12 @@ public class ScheduleService {
                     .map(schd -> mapToScheduleGetResponse(schd))
                     .collect(Collectors.toList());
     }
+    public List<ScheduleGetResponse> getTeacherSchedule(Long teacher_id, LocalDateTime date) {
+        List<Schedule> scheduleList =  scheduleRepository.findTeacherScheduleByDate(teacher_id, date);
+        return scheduleList.stream()
+                .map(schd -> mapToScheduleGetResponse(schd))
+                .collect(Collectors.toList());
+    }
 
     public List<ScheduleGetResponse> getClassSchedule(Long class_id, LocalDateTime date) {
         List<Schedule> scheduleList =  scheduleRepository.findClassScheduleByDate(class_id, date);
@@ -35,7 +41,11 @@ public class ScheduleService {
                     .schedule_id(schd.getSchedule_id())
                     .schedule_type_id(schd.getSchedule_type_id().getName())
                     .register_id(schd.getRegister_id().getRegister_id())
+                    .class_id(schd.getRegister_id().getClass_id().getClass_id())
+                    .class_name(schd.getRegister_id().getClass_id().getName())
                     .teacher_id(schd.getRegister_id().getTeacher_id().getTeacher_id())
+                    .name(schd.getRegister_id().getTeacher_id().getUser_id().getName())
+                    .second_name(schd.getRegister_id().getTeacher_id().getUser_id().getSecond_name())
                     .subject(schd.getRegister_id().getSubject_id().getName())
                     .date(schd.getDate())
                     .build();

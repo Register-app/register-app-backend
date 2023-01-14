@@ -1,6 +1,8 @@
 package com.registerapp.registerServerAPI.controller;
 
 
+import com.registerapp.registerServerAPI.entity.Student;
+import com.registerapp.registerServerAPI.entity.Teacher;
 import com.registerapp.registerServerAPI.service.TeacherService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,4 +24,8 @@ public class TeacherController {
     public ResponseEntity<?> getTeacherByUser(@PathVariable Long user_id) throws Exception {
         return ResponseEntity.ok(teacherService.getTeacherByUser(user_id));
     }
+//    @GetMapping("/info/{id}")
+//    public Teacher getSingleTeacher(@PathVariable Long id){
+//        return teacherService.getSingleTeacher(id);
+//    }
 }

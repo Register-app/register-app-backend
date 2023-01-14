@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface TeacherRepository  extends JpaRepository<Teacher, Long> {
     @Query(value = "SELECT * FROM teacher t WHERE t.user_id = ?1", nativeQuery = true)
     Optional<Teacher> findByUser(Long user_id);
+
 }
