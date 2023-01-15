@@ -5,9 +5,12 @@ import com.registerapp.registerServerAPI.payload.request.GradeUpdateRequest;
 import com.registerapp.registerServerAPI.payload.response.MessageResponse;
 import com.registerapp.registerServerAPI.service.GradeService;
 import lombok.AllArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @RestController
@@ -20,6 +23,10 @@ public class GradeController {
     @PreAuthorize("hasAnyRole('TEACHER')")
     public ResponseEntity<?> getGradesByClassAndSubject(@PathVariable Long class_id, @PathVariable Long subject_id) throws Exception {
         return ResponseEntity.ok(gradeService.getGradesByClassAndSubject(class_id, subject_id));
+    }
+    @GetMapping("/student/{student_id}/date/{date}")
+    public ResponseEntity<?> getGradesByStudentId(@PathVariable Long student_id,  @RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime ldt) throws Exception {
+        return ResponseEntity.ok(gradeService.findAllByStudentId(student_id, ldt));
     }
 
     @PostMapping("/grade")

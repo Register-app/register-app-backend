@@ -4,11 +4,13 @@ import com.registerapp.registerServerAPI.entity.*;
 import com.registerapp.registerServerAPI.payload.request.GradeAddRequest;
 import com.registerapp.registerServerAPI.payload.request.GradeUpdateRequest;
 import com.registerapp.registerServerAPI.payload.response.GetGradeByClassAndSubjectResponse;
+import com.registerapp.registerServerAPI.payload.response.GetGradeByStudentIdResponse;
 import com.registerapp.registerServerAPI.payload.response.GradeAddResponse;
 import com.registerapp.registerServerAPI.repository.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -27,9 +29,27 @@ public class GradeService {
     public List<GetGradeByClassAndSubjectResponse> getGradesByClassAndSubject(Long class_id, Long subject_id) {
         Set<Grade> grades = gradeRepository.findAllByClassAndSubject(class_id, subject_id);
 
+
         return grades.stream()
                 .map(grd -> mapToGetGradeByClassAndSubjectResponse(grd))
                 .collect(Collectors.toList());
+    }
+
+    public List<GetGradeByStudentIdResponse> findAllByStudentId(Long student_id, LocalDateTime date) {
+        List<Grade> grades = gradeRepository.findAllByStudentId(student_id, date);
+
+
+        return grades.stream()
+                .map(grd -> mapToGetGradeByStudentIdResponse(grd))
+                .collect(Collectors.toList());
+    }
+
+    private GetGradeByStudentIdResponse mapToGetGradeByStudentIdResponse(Grade grd) {
+        return GetGradeByStudentIdResponse.builder()
+                .value_text(grd.getGrade_value_id().getText())
+                .type_text(grd.getGrade_type_id().getText())
+                .subject(grd.getRegister_id().getSubject_id().getName())
+                .build();
     }
 
     private GetGradeByClassAndSubjectResponse mapToGetGradeByClassAndSubjectResponse(Grade grd) {
